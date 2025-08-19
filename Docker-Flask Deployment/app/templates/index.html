@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CIFAR-10 Image Classifier </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>CIFAR-10 Image Classifier — Hyperparameter-Tuned Model</h1>
+    <form method="POST" action="/predict" enctype="multipart/form-data">
+        <input type="file" name="file" accept="image/*" required><br>
+        <button type="submit">Predict</button>
+    </form>
+    {% if prediction %}
+        <h2>Prediction: {{ prediction }}</h2>
+    {% endif %}
+    {% if image_url %}
+        <img src="{{ image_url }}" alt="Uploaded Image">
+    {% endif %}
+</body>
+</html>
