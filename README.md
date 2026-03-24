@@ -1,87 +1,100 @@
-# CIFAR-10 CNN Classifier – Training & Deployment
+# CIFAR-10 CNN Classifier - Training & Deployment
 
-This project demonstrates both machine learning experimentation and deployment of a trained CNN model for image classification using the CIFAR-10 dataset.
+This project focuses on training, evaluating, and deploying a CNN-based image classifier for the CIFAR-10 dataset.
 
 It includes:
-- CNN CIFAR-10 experiments (Jupyter Notebook) – Training and comparing different CNN architectures.
-- Flask Web App – Serving the trained model with a basic web interface, only to showcase the model accuracy.
-- Docker Containerization – Deployable as a Docker image for portability.
-
+- CNN CIFAR-10 experiments (Jupyter Notebook) - Building and comparing multiple CNN configurations in TensorFlow/Keras
+- Flask Web App - Serving the best saved model through a simple image upload interface
+- Docker Containerization - Packaging the Flask app for portable deployment
 
 ## Model Training
 
-The CNN CIFAR-10 experiments notebook contains:
+The `CNN CIFAR-10 experiments.ipynb` notebook contains:
 
 1. Baseline CNN
-2. CNN with BatchNorm + Dropout
-3. Two convolutional Deep CNN (No Data Augmentation)
-4. Two convolutional Deep CNN (With Data Augmentation)
-5. CNN + Hyperparameter tuning with Hyperband
-6. Final Optimised Model
+2. CNN with Batch Normalization + Dropout
+3. Deeper CNN without data augmentation
+4. Deeper CNN with data augmentation
+5. Hyperparameter tuning with Keras Tuner Hyperband
+6. Final model rebuilt from the best hyperparameters
 
+The notebook also includes model evaluation, prediction visualizations, and single-image inference examples.
 
-### The Model used in this deployment
-CIFAR-10 IMAGE CLASSIFIER — Hyperparameter-Tuned Model
+### Model used in deployment
 
-#### Training accuray <font color="green">(94%)</font>
+CIFAR-10 Image Classifier - Hyperparameter-Tuned Model
+
+#### Training accuracy <font color="green">(94%)</font>
 #### Validation accuracy <font color="green">(87.8%)</font>
 #### Test accuracy <font color="green">(87.2%)</font>
 
-<br>Using a pre-trained Model with Flask web app to classify images of CIFAR-10 categories.
-
+<br>Uses the trained hyperparameter-tuned model in a Flask web app to classify uploaded images into CIFAR-10 categories.
 
 ### Requirements
-Python 3.10+
-<br>Flask 2.3.3
-<br>Pillow
-<br>Numpy
-<br>TensorFlow
 
-### A Simple Webpage
-Using a minimalistic Docker configuration with Flask serving the hyperparameter-tuned CNN model with an easy frontend for file upload and prediction.
+Python 3.10+  
+Flask 2.3.3  
+Pillow  
+NumPy  
+TensorFlow
+
+### Web App
+
+Uses a minimal Flask + Docker setup to serve the trained model with a simple file upload and prediction page.
 
 ![Web Page](images/image-classifier-webpage.png)
 
 ## Docker Setup
 
-Make sure you have Docker installed:
+Make sure you have Docker installed.
+
 ### Build the Docker Image
-Go into the backend folder of the project: ".../Docker-Flask Deployment"
-```
+
+Go into the deployment folder:
+
+```bash
+cd "Docker-Flask Deployment"
 docker build -t cifar10-hyper-app .
 ```
 
-Run docker container
-```
+### Run the Docker Container
+
+```bash
 docker run -d -p 5000:5000 cifar10-hyper-app
 ```
 
-Run in browser
-http://127.0.0.1:5000
+Open in browser:
 
+`http://127.0.0.1:5000`
 
-## Running without Docker (Locally)
+## Run Locally
 
-### Create and activate Virtual Environment
-open "app" folder and create Venv
-```
+### Create and activate a virtual environment
+
+Open the `Docker-Flask Deployment/app` folder and create a virtual environment:
+
+```bash
 python -m venv venv
 ```
 
-activate venv
-```
-. venv/Scripts/activate
+Activate it:
+
+```bash
+venv\Scripts\activate
 ```
 
-install dependencies
-```
+Install dependencies:
+
+```bash
 pip install -r requirements.txt
 ```
 
-run the flask app
-```
+Run the Flask app:
+
+```bash
 python main.py
 ```
 
-Run in browser
-http://127.0.0.1:5000
+Open in browser:
+
+`http://127.0.0.1:5000`
