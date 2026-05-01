@@ -1,13 +1,14 @@
 body {
     font-family: Arial, sans-serif;
-    background: #f4f6f8;
+    background: #fff1df;
     text-align: center;
     margin: 0;
     padding: 0;
+    min-height: 100vh;
 }
 
 h1 {
-    background: #5c5c5c;
+    background: #1f3b73;
     color: white;
     padding: 20px;
     margin: 0;
@@ -16,31 +17,85 @@ h1 {
 
 form {
     background: white;
-    margin: 40px auto;
+    margin: 80px auto 40px;
     padding: 30px;
     border-radius: 10px;
-    max-width: 400px;
+    max-width: 560px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-input[type="file"] {
-    margin: 15px 0;
-    padding: 5px;
+.upload-preview-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    width: 100%;
+}
+
+.file-upload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin: 15px 0 20px;
+}
+
+.file-button {
+    display: inline-block;
+    background: #e9eef5;
+    color: #222;
+    border: 1px solid #b8c2cf;
+    padding: 8px 18px;
+    border-radius: 5px;
+    cursor: pointer;
     font-size: 1em;
 }
 
-button {
+.file-button:hover {
+    background: #dde5ee;
+}
+
+.file-name {
+    color: #555;
+    font-size: 0.95em;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+}
+
+.file-upload input[type="file"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.image-preview {
+    display: none;
+    width: 120px;
+    height: 120px;
+    margin-top: 0;
+    border-radius: 8px;
+    border: 2px solid #ccc;
+    object-fit: cover;
+}
+
+.predict-button {
     background: #4476ff;
     color: white;
     border: none;
-    padding: 10px 20px;
+    margin-top: 20px;
+    padding: 10px 70px;
     font-size: 1em;
     border-radius: 5px;
     cursor: pointer;
     transition: background 0.3s;
 }
 
-button:hover {
+.predict-button:hover {
     background: #666680;
 }
 
@@ -50,9 +105,25 @@ h2 {
     margin-top: 20px;
 }
 
+.prediction-value {
+    color: #d62828;
+    font-weight: 800;
+}
+
 img {
     margin-top: 15px;
     max-width: 200px;
     border-radius: 8px;
     border: 2px solid #ccc;
+}
+
+@media (max-width: 600px) {
+    form {
+        max-width: 400px;
+    }
+
+    .upload-preview-row {
+        flex-direction: column;
+        gap: 12px;
+    }
 }

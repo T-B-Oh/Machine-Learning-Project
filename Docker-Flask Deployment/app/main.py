@@ -4,6 +4,7 @@ import numpy as np
 from PIL import Image
 import io
 import os
+import base64
 
 app = Flask(__name__)
 
@@ -31,13 +32,20 @@ def predict():
 
     file = request.files["file"]
     image_bytes = file.read()
+    image_type = file.mimetype or "image/png"
+    image_url = f"data:{image_type};base64," + base64.b64encode(image_bytes).decode("utf-8")
     input_data = preprocess_image(image_bytes)
 
     prediction = model.predict(input_data)
     predicted_class = int(np.argmax(prediction[0]))
     predicted_label = cifar10_labels[predicted_class]
 
-    return render_template("index.html", prediction=predicted_label)
+    return render_template(
+        "index.html",
+        prediction=predicted_label,
+        image_url=image_url,
+        file_name=file.filename
+    )
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
